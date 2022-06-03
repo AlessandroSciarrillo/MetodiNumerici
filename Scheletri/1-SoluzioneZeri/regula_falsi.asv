@@ -7,7 +7,7 @@ if sign(fa)*sign(fb)>=0
 else 
     it=0;
     fxk=fname(a);
-    while it<nmax && abs(b-a)>=tol && abs(fxk)>=tol %%
+    while  
         it=it+1;
         xk(it)=a-fa*(b-a)/(fb-fa); %%
         %fprintf('it=%d  x=%8.15f \n',it,xk(it));
