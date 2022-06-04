@@ -21,10 +21,12 @@ function [L,U,P,flag]=LU_parziale(A)
       %Scelta pivot parziale + scambi su U e P
       %Al passo k calcolo l'indice di riga (a partire da k) in cui si trova
       %l'elemento di modulo massimo della colonna k-esima
-      [pivot,ir_pivot]=max(abs(U(k:n,k))); 
+      [pivot,ir_pivot]=max(abs(U(k:n,k))); %[M,I] = max(___) also returns the index into the operating dimension that corresponds to the maximum value of A.
       ir_pivot=ir_pivot+(k-1); 
       if pivot == 0
-          %to do 
+          disp('pivot nullo') %%
+          L=[]; %%
+          flag=1; %%
           return
       end
       %Se l'indice di riga ir_pivot in cui si trova l'elemento di modulo massimo
@@ -33,15 +35,26 @@ function [L,U,P,flag]=LU_parziale(A)
       %corrispondenti righe della matrice identità per memorizzare gli
       %scambi effettuati
       if ir_pivot  ~= k
-         % to do 
+         temp=U(K,:); %%
+         U(k,:)=U(ir_pivot,:); %%
+         U(ir_pivot,:)=temp; %%
+         temp=P(k,:); %%
+         P(k,:)=P(ir_pivot,:); %%
+         P(ir_pivot,:)=temp; %%
       end
       %Procediamo con l'eliminazione gaussiana classica
       %Eliminazione gaussiana
 	  %Scrivi qui il codice che modifica le righe successive alla k-esima
        % calcola il moltiplicatore per la riga i
        %modifica la riga i negli elementi di posizione j da k+1 in avanti
+       for i=k+1:n %%
+           U(i,k)=U(i,k)/U(k,k); %%
+           for j=k+1:n %%
+               U(i,j)=U(i,j)-U(i,k)*U(k,j) %%
+           end %%
+       end %%
     end
   
-  L= ; % Estrae i moltiplicatori 
-  U= ;           % Estrae la parte triangolare superiore+diagonale
+  L= tril(U,-1)+eye(n); % Estrae i moltiplicatori 
+  U= triu(U);           % Estrae la parte triangolare superiore+diagonale
   

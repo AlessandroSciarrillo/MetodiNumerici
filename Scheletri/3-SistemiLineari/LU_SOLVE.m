@@ -5,6 +5,5 @@ Pb=P*b
 if flag==0
     [x,flag]=Usolve(U,y);
 else
-    return
-   
+    return   
 end

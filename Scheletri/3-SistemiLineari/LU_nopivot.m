@@ -35,8 +35,14 @@
        %Scrivi qui il codice che modifica le righe successive alla k-esima
        % calcola il moltiplicatore per la riga i
        %modifica la riga i negli elementi di posizione j da k+1 in avanti
-         end
-  
-  L=  % Estrae i moltiplicatori 
-  U=           % Estrae la parte triangolare superiore + diagonale
+       for i=k+1:n %%
+           U(i,k)=U(i,k)/U(k,k); %%
+           for j=k+1:n %%
+               U(i,j)=U(i,j)-U(i,k)*U(k,j); %%
+           end %%
+       end %%
+end
+  %%tril(U,-1) Extract only the elements below the main diagonal.
+  L=tril(U,-1)+eye(n); %%  % Estrae i moltiplicatori 
+  U=triu(U); %%            % Estrae la parte triangolare superiore + diagonale
   
