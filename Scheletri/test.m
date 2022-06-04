@@ -1,38 +1,38 @@
-function [x1,xk,it]=newton(fname,fpname,x0,tolx,tolf,nmax)
+function [x1,Xm,it]=my_newtonSys(fun,jac,x0,tolx,tolf,nmax)
 
-fx0=fname(x0);
-dfx0=fpname(x0);
-if abs(dfx0)>eps
-    d=fx0/dfx0;
-    x1=x0-d;
-    fx1=fname(fx1);
-    it=1;
-    xk(it)=x1;
-else
-    fprintf('Derivata nulla in x0 - EXIT \n')
-    disp(dfx0)
+matjac=jac(x0);
+if det(matjac)==0
+    disp('la matrice dello jacobiano calcolata nell iterato precedente non è a rango massimo')
     x1=[];
-    xk=[];
+    Xm=[];
     it=[];
+    return
+else
+    s=-matjac\fun(x0);
+    it=1;
+    x1=x0+s;
+    fx1=fun(x1);
 end
 
-while it<nmax && abs(fx1)<=tolf && abs(d)>=tolx*abs(x1)
+Xm=[norm(s,1)/norm(x1,1)];
+while it<=nmax && norm(fx1,1)>=tolf && norm(s,1)>=tolx*norm(x1,1)
     x0=x1;
-    fx0=fname(x0);
-    dfx0=fpname(x0);
-    if abs(dfx0)>eps
-        d=fx0/dfx0;
-        x1=x0-d;
-        fx1=feval(fname,x1);
-        it=it+1;
-        xk(it,:)=x1;
+    it=it+1;
+    matjac=jac(x0);
+    if det(matjac)==0
+        disp('la matrice dello jacobiano calcolata nell iterato precedente non è a rango massimo')
+        x1=[];
+        Xm=[];
+        it=[];
+        return
     else
-        fprintf('Derivata nulla in xw - EXIT \n')
-        disp(dfx0)
-        break
+        s=matjac/fun(x0);
+        x1=x0-s;
+        fx1=fun(x1);
+        Xm=[Xm;norm(s,1)/norm(x1,1)]
     end
 end
-if it==nmax
-    fprintf('raggiunto massumo numero di iterazioni')
-end
 
+if it==nmax
+    disp('Il procedimento non converge con la precisione desiderata')
+end
