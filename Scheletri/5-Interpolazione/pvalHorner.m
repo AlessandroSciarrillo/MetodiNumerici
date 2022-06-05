@@ -15,6 +15,6 @@
   for i=1:nval
   pval(i) = a(n);
       for k=n-1:-1:1
-
+         pval(i)=xv(i)*pval(i) + a(k); %%
       end
   end

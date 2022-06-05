@@ -4,16 +4,16 @@ Nmax=2048;
 err=1;
 
 N=1;
-IN= 
+IN= TrapComp(fun,a,b,N); %%
 
 while N<=Nmax && err>tol
     N=2*N;
-     
+    I2N=TrapComp(fun,a,b,N); %%
     if abs(IN-I2N)==0
         N=N/2;
         return
     end
-    err= ;
+    err=abs(IN-I2N)/3; %%
     IN=I2N;
 end
 

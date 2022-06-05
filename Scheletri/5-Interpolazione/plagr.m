@@ -10,3 +10,5 @@ end
 
 %calcola i coefficienti del polinomio di grado n che si annulla nei punti
 %del vettore xzeri e vale 1 nel nodo xnodi(k)
+p=poly(xzeri); %%
+p=p/polyval(p,xnodi(k)); %%

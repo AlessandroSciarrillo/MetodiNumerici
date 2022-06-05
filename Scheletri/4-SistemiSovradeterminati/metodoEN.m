@@ -6,16 +6,21 @@ function [a,condG,p]=metodoEN(A,b)
 % Normali
 
 % Risolvi il sistema delle equazioni normali A'*A a = A'b
- 
+G=A'*A; %%
 %Costruzione matrice e termine noto
-
-%to do
+condG=cond(G); %%
+z=A'*b; %%
 
 %fattorizzazione di Choleski
-%to do
+[L,p]=chol(G,"lower"); %%
 
 %Soluzione del sistema triangolare inferiore
-%to do
-
-%Soluzione del sistema triangolare inferiore
+if p>0 %%
+    disp('G non definita positiva') %%
+    a=G\z; %%
+    return %%
+else %%
+    b1=Lsolve(L,z); %%
+    a=Usolve(L',b1); %%
+end %%
 
