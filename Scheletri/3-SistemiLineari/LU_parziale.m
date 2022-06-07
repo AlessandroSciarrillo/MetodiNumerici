@@ -35,7 +35,7 @@ function [L,U,P,flag]=LU_parziale(A)
       %corrispondenti righe della matrice identità per memorizzare gli
       %scambi effettuati
       if ir_pivot  ~= k
-         temp=U(K,:); %%
+         temp=U(k,:); %%
          U(k,:)=U(ir_pivot,:); %%
          U(ir_pivot,:)=temp; %%
          temp=P(k,:); %%
@@ -50,7 +50,7 @@ function [L,U,P,flag]=LU_parziale(A)
        for i=k+1:n %%
            U(i,k)=U(i,k)/U(k,k); %%
            for j=k+1:n %%
-               U(i,j)=U(i,j)-U(i,k)*U(k,j) %%
+               U(i,j)=U(i,j)-U(i,k)*U(k,j); %%
            end %%
        end %%
     end

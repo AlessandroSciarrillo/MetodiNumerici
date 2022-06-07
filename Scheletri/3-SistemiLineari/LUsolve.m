@@ -1,4 +1,4 @@
-function [x,flag] = LU_SOLVE(L,U,P,b)
+function [x,flag] = LUsolve(L,U,P,b)
 %Risolve il sistema Ax=b a partire dalla fattorizzazione
 Pb=P*b
 [y,flag]=Lsolve(L,Pb);
