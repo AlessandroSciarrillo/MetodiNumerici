@@ -1,4 +1,4 @@
-function [x1,xk,it]=newtonm(fname,fpname,x0,tolx,tolf,nmax)
+function [x1,xk,it]=newtonm(fname,fpname,m,x0,tolx,tolf,nmax)
 
 fx0=fname(x0);
 dfx0=fpname(x0);
